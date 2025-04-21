@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced CPU Scheduler Simulator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Github-desktop-logo-symbol.svg/2048px-Github-desktop-logo-symbol.svg.png" alt="">
+            <a href="https://github.com/adityadhimaann/CpuScheduler">GitHub</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Advanced CPU Scheduler Simulator</h1>
+
+        <div class="grid-container">
+            <!-- Process Input Section -->
+            <div class="section">
+                <h2 class="section-title">Add Process</h2>
+                <div class="input-group">
+                    <div>
+                        <label for="processId">Process ID:</label>
+                        <input type="text" id="processId" placeholder="P1">
+                    </div>
+                    <div>
+                        <label for="arrivalTime">Arrival Time:</label>
+                        <input type="number" id="arrivalTime" min="0" placeholder="0">
+                    </div>
+                    <div>
+                        <label for="burstTime">Burst Time:</label>
+                        <input type="number" id="burstTime" min="1" placeholder="5">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div>
+                        <label for="priority">Priority (if applicable):</label>
+                        <input type="number" id="priority" min="1" placeholder="1">
+                    </div>
+                    <div>
+                        <label for="processColor">Color (optional):</label>
+                        <input type="color" id="processColor" value="#3B82F6">
+                    </div>
+                </div>
+
+                <div class="buttons">
+                    <button id="addProcessBtn" class="btn">Add Process</button>
+                    <button id="resetBtn" class="btn btn-reset">Reset All</button>
+                </div>
+
+                <div>
+                    <button id="generateRandomBtn" class="btn">Generate Random Processes</button>
+                </div>
+            </div>
+
+            <!-- Algorithm Selection -->
+            <div class="section">
+                <h2 class="section-title">Scheduling Configuration</h2>
+                <div>
+                    <label for="algorithm">Select Scheduling Algorithm:</label>
+                    <select id="algorithm">
+                        <option value="fcfs">First Come First Serve (FCFS)</option>
+                        <option value="sjf">Shortest Job First (SJF) - Non-preemptive</option>
+                        <option value="srtf">Shortest Remaining Time First (SRTF) - Preemptive</option>
+                        <option value="rr">Round Robin (RR)</option>
+                        <option value="priority">Priority Scheduling - Non-preemptive</option>
+                        <option value="priority_p">Priority Scheduling - Preemptive</option>
+                    </select>
+
+                    <div id="quantumInput" class="hidden">
+                        <label for="timeQuantum">Time Quantum:</label>
+                        <input type="number" id="timeQuantum" min="1" value="2">
+                    </div>
+
+                    <div>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="showSteps">
+                            <span>Show execution steps</span>
+                        </label>
+                    </div>
+
+                    <button id="runSchedulerBtn" class="btn btn-run">Run Scheduler</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Process Table -->
+        <div class="section table-section">
+            <h2 class="section-title">Process List</h2>
+            <table id="processTable">
+                <thead>
+                    <tr>
+                        <th>PID</th>
+                        <th>Arrival Time</th>
+                        <th>Burst Time</th>
+                        <th>Priority</th>
+                        <th>Color</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="processTable"></tbody>
+            </table>
+        </div>
+
+        <!-- Results Section -->
+        <div id="resultsSection" class="section hidden">
+            <h2 class="section-title">Scheduling Results</h2>
+
+            <!-- Gantt Chart -->
+            <div class="gantt">
+                <h3 class="gantt-title">Gantt Chart</h3>
+                <div id="ganttChart"></div>
+                <div id="ganttTimeline"></div>
+            </div>
+
+            <!-- Execution Steps -->
+            <div id="executionStepsContainer" class="execution-steps hidden">
+                <h3 class="execution-steps-title">Execution Steps</h3>
+                <div id="executionSteps"></div>
+            </div>
+
+            <!-- Results Table -->
+            <div>
+                <h3>Process Metrics</h3>
+                <table id="resultTable">
+                    <thead>
+                        <tr>
+                            <th>PID</th>
+                            <th>Arrival Time</th>
+                            <th>Burst Time</th>
+                            <th>Completion Time</th>
+                            <th>Turnaround Time</th>
+                            <th>Waiting Time</th>
+                            <th>Response Time</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultTable"></tbody>
+                </table>
+            </div>
+
+            <!-- Summary Metrics -->
+            <div class="metrics">
+                <div id="avgMetrics" class="metric">
+                    <h3>Average Metrics</h3>
+                    <div id="averageMetrics"></div>
+                </div>
+                <div id="cpuUtil" class="metric">
+                    <h3>CPU Utilization</h3>
+                    <div id="cpuUtilization"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
